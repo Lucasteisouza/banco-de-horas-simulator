@@ -1,0 +1,30 @@
+{
+  "name": "banco-de-horas-simulator",
+  "version": "1.0.0",
+  "description": "Simulação de controle de horas de uma empresa fictícia baseada no app da Totvs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install:front": "cd ./frontend && npm install",
+    "install:back": "cd ./backend && npm install",
+    "install:apps": "npm run install:front && npm run install:back",
+    "start:front": "cd ./frontend && npm preview",
+    "start:back": "cd ./backend && npm start",
+    "start:apps": "npm run start:front && npm run start:back",
+    "start": "docker-compose up -d --build && npm run install:apps && npm run start:apps",
+    "dev:back": "cd ./backend && npm run dev",
+    "dev:front": "cd ./frontend && npm run dev",
+    "dev": "npm run dev:front && npm run dev:back"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lucasteisouza/banco-de-horas-simulator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lucasteisouza/banco-de-horas-simulator/issues"
+  },
+  "homepage": "https://github.com/Lucasteisouza/banco-de-horas-simulator#readme"
+}
