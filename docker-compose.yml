@@ -17,36 +17,36 @@ services:
       start_period: 60s
     cap_add:
       - SYS_NICE
-  frontend:
-    container_name: app-frontend
-    build: ./frontend
-    ports:
-      - 5173:5173
-    volumes:
-      - ./frontend/src:/app-frontend/src
-    working_dir: /app-frontend
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:5173"]
-      timeout: 10s
-      retries: 5
-  backend:
-    container_name: app-backend
-    build: ./backend
-    ports:
-      - 3000:3000
-    working_dir: /app-backend
-    volumes:
-      - ./backend/src:/app-backend/src
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      - APP_PORT=3001
-      - DB_USER=root
-      - DB_PASS=123456
-      - DB_HOST=db
-      - DB_PORT=3306
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3001"]
-      timeout: 10s
-      retries: 5
+  # frontend:
+  #   container_name: app-frontend
+  #   build: ./frontend
+  #   ports:
+  #     - 5173:5173
+  #   volumes:
+  #     - ./frontend/src:/app-frontend/src
+  #   working_dir: /app-frontend
+  #   healthcheck:
+  #     test: ["CMD", "lsof", "-t", "-i:5173"]
+  #     timeout: 10s
+  #     retries: 5
+  # backend:
+    # container_name: app-backend
+    # build: ./backend
+    # ports:
+    #   - 3000:3000
+    # working_dir: /app-backend
+    # volumes:
+    #   - ./backend/src:/app-backend/src
+    # depends_on:
+    #   db:
+    #     condition: service_healthy
+    # environment:
+    #   - APP_PORT=3001
+    #   - DB_USER=root
+    #   - DB_PASS=123456
+    #   - DB_HOST=db
+    #   - DB_PORT=3306
+    # healthcheck:
+    #   test: ["CMD", "lsof", "-t", "-i:3001"]
+    #   timeout: 10s
+    #   retries: 5

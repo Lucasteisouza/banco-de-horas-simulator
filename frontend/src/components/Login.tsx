@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { loginAPI } from '../helpers/fetchAPI'
 
 const Login = () => {
+  const navigate = useNavigate();
   const [state, setState] = useState({
     username: '',
     senha: ''
@@ -14,12 +17,25 @@ const Login = () => {
     });
   }
 
+  const handleClick = async () => {
+    try {
+      const data = await loginAPI(state.username, state.senha);
+      if (data) {
+        localStorage.setItem('token', data.token);
+        navigate('/home');
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
+
   return (
     <div>
       <h3>Login</h3>
-      <form>
+      <form action='localhost:3000'>
         <div>
           <input
+            name='username'
             type="text"
             placeholder="username"
             value={state.username}
@@ -28,13 +44,17 @@ const Login = () => {
         </div>
         <div>
           <input
-            type="senha"
+            name='senha'
+            type='password'
             placeholder="senha"
             value={state.senha}
             onChange={handleChanges}
           />
         </div>
-        <button type="submit">Login</button>
+        <button
+          type="button"
+          onClick={handleClick}
+        >Login</button>
       </form>
     </div>
   )
