@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { IUser } from './interfaces/';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  login(body: IUser) {
+    return body;
   }
 }

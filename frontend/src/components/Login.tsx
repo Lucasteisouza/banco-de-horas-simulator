@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loginAPI } from '../helpers/fetchAPI'
 
@@ -6,7 +6,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [state, setState] = useState({
     username: '',
-    senha: ''
+    senha: '',
+    isButtonDisabled: true,
   })
 
   const handleChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,6 +18,20 @@ const Login = () => {
     });
   }
 
+  useEffect(() => {
+    if (state.username.length >= 4 && state.senha.length >= 6) {
+      setState({
+        ...state,
+        isButtonDisabled: false,
+      });
+    } else {
+      setState({
+        ...state,
+        isButtonDisabled: true,
+      });
+    }
+  }, [state.username, state.senha]);
+
   const handleClick = async () => {
     try {
       const data = await loginAPI(state.username, state.senha);
@@ -25,7 +40,7 @@ const Login = () => {
         navigate('/home');
       }
     } catch (error) {
-      alert(error);
+      alert('Erro de login, verifique suas informações e tente novamente.');
     }
   }
 
@@ -54,7 +69,10 @@ const Login = () => {
         <button
           type="button"
           onClick={handleClick}
-        >Login</button>
+          disabled={state.isButtonDisabled}
+        >
+          Login
+        </button>
       </form>
     </div>
   )
