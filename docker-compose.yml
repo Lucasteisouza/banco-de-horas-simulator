@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: mysql:8.0.32
+    image: mysql:latest
     container_name: db
     ports:
       - 3306:3306
@@ -10,13 +10,13 @@ services:
     volumes:
       - ./db:/var/lib/mysql
     restart: 'always'
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 5
-      start_period: 60s
-    cap_add:
-      - SYS_NICE
+    # healthcheck:
+    #   test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+    #   timeout: 10s
+    #   retries: 5
+    #   start_period: 60s
+    # cap_add:
+    #   - SYS_NICE
   # frontend:
   #   container_name: app-frontend
   #   build: ./frontend
