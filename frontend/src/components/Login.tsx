@@ -7,8 +7,9 @@ const Login = () => {
   const [state, setState] = useState({
     username: '',
     senha: '',
-    isButtonDisabled: true,
   })
+
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const handleChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -20,21 +21,16 @@ const Login = () => {
 
   useEffect(() => {
     if (state.username.length >= 4 && state.senha.length >= 6) {
-      setState({
-        ...state,
-        isButtonDisabled: false,
-      });
+      setIsButtonDisabled(false);
     } else {
-      setState({
-        ...state,
-        isButtonDisabled: true,
-      });
+      setIsButtonDisabled(true);
     }
-  }, [state.username, state.senha]);
+  }, [state]);
 
   const handleClick = async () => {
     try {
-      const data = await loginAPI(state.username, state.senha);
+      const loginInfo = {username: state.username, senha: state.senha};
+      const data = await loginAPI(loginInfo);
       if (data) {
         localStorage.setItem('token', data.token);
         navigate('/home');
@@ -69,7 +65,7 @@ const Login = () => {
         <button
           type="button"
           onClick={handleClick}
-          disabled={state.isButtonDisabled}
+          disabled={isButtonDisabled}
         >
           Login
         </button>

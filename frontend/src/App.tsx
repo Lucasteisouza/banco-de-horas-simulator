@@ -3,6 +3,7 @@ import Header from './components/Header'
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import UserPage from './pages/UserPage'
+import NewUserPage from './pages/NewUserPage'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
 function App() {
@@ -14,9 +15,10 @@ function App() {
         <Routes>
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/newuser" element={<NewUserPage />} />
           <Route path="/user/:id" element={<UserPage />} />
           <Route path="/" element={ <Navigate to={'/login'}/>} />
-          <Route path="*" element={<h1>Not Found</h1>} />
+          <Route path="/*" element={<h1>Not Found</h1>} />
         </Routes>
       </div>
     </>

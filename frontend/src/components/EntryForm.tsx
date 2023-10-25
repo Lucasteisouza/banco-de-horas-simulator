@@ -15,7 +15,7 @@ const EntryForm = () => {
 
   const handleSubmit = async () => {
     try{
-      const reqBody = {type: state.tipo, hitTime: new Date(state.data + 'T' + state.hora + ':00'), employeeId: id}
+      const reqBody = {type: state.tipo, hitTime: new Date(state.data + 'T' + state.hora + ':00'), employeeId: 1} //placeholder employeeId - ALTERAR
       newHitAPI(reqBody);
       navigate('/home');
     }
